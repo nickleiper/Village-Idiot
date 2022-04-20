@@ -1,28 +1,24 @@
-from Market import market
-from Forest import forest
-
-
-def game_over():
-    print("Well... that's unfortunate. I'm afraid this is the end of the line.")
-    exit()
-
-
-class Quest:
-    def __init__(self, complete, available, prompt, launch):
-        Quest.completion = complete
-        Quest.available = available
-        Quest.prompt = prompt
-        Quest.launch = launch
-
-    def make_available(self):
-        Quest.available = True
+from Quest import Quest
 
 
 class StoryPath:
     def __init__(self):
-        StoryPath.market = Quest(False, True, "MARKET - Go to the market", market())
-        StoryPath.forest = Quest(False, True, "FOREST - Go to the forest", forest())
+        StoryPath.market = Quest(0, 0, 0)
+        StoryPath.forest = Quest(0, 0, 0)
+        StoryPath.test = Quest(0, 0, 0)
+
+    def dev_storypath(self):
+        StoryPath.market.prompt = "MARKET - Go to the market"
+        StoryPath.market.completion = False
+        StoryPath.market.available = True
+        StoryPath.forest.prompt = "FOREST - Go to the forest"
+        StoryPath.forest.completion = False
+        StoryPath.forest.available = True
+        StoryPath.test.prompt = "WRONG"
+        StoryPath.test.completion = True
+        StoryPath.test.available = False
 
 
 '''AS THE PC COMPLETES QUESTS, COMPLETION BECOMES TRUE AND AVAILABLE BECOMES FALSE. THE HOME FUNCTION, what_do_you_do
-CALLS ON THE QUEST ATTRIBUTE TO PROMPT THE PLAYER INTO THE QUEST.'''
+CALLS ON THE QUEST ATTRIBUTE TO PROMPT THE PLAYER INTO THE QUEST. THE dev_storypath FUNCTION CREATES THE RELEVANT 
+STORYPATH'''

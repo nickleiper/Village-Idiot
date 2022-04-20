@@ -1,5 +1,9 @@
 from random import randint
-from Storypath import game_over
+
+
+def game_over():
+    print("Well... that's unfortunate. I'm afraid this is the end of the line.")
+    exit()
 
 
 def roll(low, high, mod):
