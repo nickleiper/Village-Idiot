@@ -20,10 +20,10 @@ class Home:
         self.progression += 1
 
     def what_do_you_do(self, storypath):
-        print("What do you do? (Type command)")
-        if not storypath.market.completion:
+        print("What do you do? (Type command)")  # !!! forest is loading twice for some reason!!!
+        if storypath.market.available:
             print(storypath.market.prompt)
-        if not storypath.forest.completion:
+        if storypath.forest.available:
             print(storypath.forest.prompt)
 
     def squash(self, sheet):
@@ -39,7 +39,7 @@ class Home:
         print("Ow! Did they just rub shit in your wounds? Science I guess...")
 
 
-def home_write_up(home, sheet, storypath):
+def home_write_up(home, sheet, inventory, storypath):
     if home.progression == 1:
         print(home.poor)
     elif home.progression == 2:
@@ -59,22 +59,40 @@ def home_write_up(home, sheet, storypath):
                 print("EAT - Have Gretchen prepare you a meal (+4 HP)")
             elif home.progression == 3:
                 print("TREAT - Have your servants tend to you wounds (+8 HP")
-            a = input()
-            if a == "SQUASH":
-                home.squash(sheet)
-                healable = False
-                looper = False
-            elif a == "EAT":
-                home.gretchen(sheet)
-                healable = False
-                looper = False
-            elif a == "TREAT":
-                home.wound_care(sheet)
-                healable = False
-                looper = False
-            else:
-                print("You can't seem to do that right now...")
-                healable = True
-                looper = True
+        a = input()
+        if a == "SQUASH":
+            home.squash(sheet)
+            healable = False
+            looper = False
+        elif a == "EAT":
+            home.gretchen(sheet)
+            healable = False
+            looper = False
+        elif a == "TREAT":
+            home.wound_care(sheet)
+            healable = False
+            looper = False
+        elif a == "MARKET" and storypath.market.available:
+            storypath.market.go_on_quest(home, inventory, sheet, storypath)
+            looper = False
+        elif a == "FOREST" and storypath.forest.available:
+            storypath.forest.go_on_quest(home, inventory, sheet, storypath)
+            looper = False
+        else:
+            print("You can't seem to do that right now...")
+            healable = True
+            looper = True
+
+
+def go_home(home, sheet, inventory, storypath):
+    print("Do you want to go home and keep playing?\nY - yes\nN - no")
+    looper = True
+    a = input()
+    while looper:
+        if a == "Y":
+           home_write_up(home, sheet, inventory, storypath)
+        elif a == "N":
+            print("Thanks for playing!")
+            return
 
 
