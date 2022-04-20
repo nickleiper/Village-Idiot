@@ -29,8 +29,8 @@ class misc:
 class Inventory:
     def __init__(self):
         # weapons
-        self.fists = Weapon(True, "melee", 1, 0)
-        self.dagger = Weapon(False, "melee", 2, 3)
+        self.fists = Weapon(True, "melee", 2, 0)
+        self.dagger = Weapon(False, "melee", 3, 3)
         self.club = Weapon(False, "melee", 4, 0)
         self.sword = Weapon(False, "melee", 6, 1)
         self.great_sword = Weapon(False, "melee", 8, 1)

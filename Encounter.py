@@ -1,6 +1,11 @@
 from random import randint
 
 
+def game_over():
+    print("Well... that's unfortunate. I'm afraid this is the end of the line.")
+    exit()
+
+
 def roll(low, high, mod):
     return randint(low, high) + mod
 
@@ -72,18 +77,20 @@ def encounter(inventory, sheet, ac, hit_points, bonus, damage_low, damage_high):
     hp = hit_points
     while hp > 0 and sheet.hp.value > 0:
         weapon_checker(inventory)
-        use_weapon(weapon_selector(inventory), sheet, ac)
+        hp -= use_weapon(weapon_selector(inventory), sheet, ac)
+        if hp > 0:
+            print("They have " + str(hp) + " HP.")
+        elif hp <= 0:
+            print("You've killed the beast!")
         counter = roll(1, 20, bonus)
         if counter >= sheet.quick.value:
             sheet.hp.value -= roll(damage_low, damage_high, 0)
-            print("They hit you back!")
+            print("But, they hit you back! You have " + str(sheet.hp.value) + " HP.")
         else:
-            print("They miss!")
+            print("They miss! You have " + str(sheet.hp.value) + " HP.")
     if sheet.hp.value <= 0:
         print("You're dead!")
-    else:
-        print("You've killed the beast!")
-
+        game_over()
 
 """THIS CODE IS A SHITSHOW. I NEED TO FIGURE OUT HOW IT WORKS, BUT BASICALLY, weapon_checker JUST LISTS ALL THE WEAPONS
 THE PLAYER POSSESSES, THEN weapon_selector PROMPTS THE PLAYER TO SELECT A WEAPON AND RETURNS WHICH WEAPON IS USED. 
