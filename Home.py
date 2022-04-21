@@ -25,6 +25,8 @@ class Home:
             print(storypath.market.prompt)
         if storypath.forest.available:
             print(storypath.forest.prompt)
+        if storypath.tall_grass.available:
+            print(storypath.tall_grass.prompt)
 
 
 def home_write_up(home, sheet, inventory, storypath):
@@ -50,17 +52,19 @@ def home_write_up(home, sheet, inventory, storypath):
         a = input()
         if a == "SQUASH":
             sheet.hp.heal(2)
-            print("Yuck! Raw squash with a hint mildew.")
+            print("Yuck! Raw squash with a hint mildew. You have " + str(sheet.hp.value) + " HP.")
             healable = False
             looper = True
-        elif a == "EAT":
+        elif a == "EAT" and home.progression > 1:
             sheet.hp.heal(4)
-            print("A delicious dense feast. Put those calories to good use! You're neighbors are starving.")
+            print("A delicious dense feast. Put those calories to good use! You're neighbors are starving.You have "
+                  + str(sheet.hp.value) + " HP.")
             healable = False
             looper = True
-        elif a == "TREAT":
+        elif a == "TREAT" and home.progression > 2:
             sheet.hp.heal(8)
-            print("Ow! Did they just rub shit in your wounds? Science I guess...")
+            print("Ow! Did they just rub shit in your wounds? Science I guess...Y ou have " + str(sheet.hp.value) +
+                  " HP.")
             healable = False
             looper = True
         elif a == "MARKET" and storypath.market.available:
@@ -68,6 +72,9 @@ def home_write_up(home, sheet, inventory, storypath):
             looper = False
         elif a == "FOREST" and storypath.forest.available:
             storypath.forest.go_on_quest(home, inventory, sheet, storypath)
+            looper = False
+        elif a == "GRASS" and storypath.tall_grass.available:
+            storypath.tall_grass.go_on_quest(home, inventory, sheet, storypath)
             looper = False
         else:
             print("You can't seem to do that right now...")
@@ -78,12 +85,15 @@ def home_write_up(home, sheet, inventory, storypath):
 def go_home(home, sheet, inventory, storypath):
     print("Do you want to go home and keep playing?\nY - yes\nN - no")
     looper = True
-    a = input()
     while looper:
+        a = input()
         if a == "Y":
-           home_write_up(home, sheet, inventory, storypath)
+            home_write_up(home, sheet, inventory, storypath)
+            looper = False
         elif a == "N":
             print("Thanks for playing!")
-            return
-
+            looper = False
+        else:
+            print("Yes or no I'm afraid.")
+            looper = True
 

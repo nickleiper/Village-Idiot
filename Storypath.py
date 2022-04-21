@@ -5,6 +5,7 @@ class StoryPath:
     def __init__(self):
         StoryPath.market = Quest(0, 0, 0)
         StoryPath.forest = Quest(0, 0, 0)
+        StoryPath.tall_grass = Quest(0, 0, 0)
         StoryPath.test = Quest(0, 0, 0)
 
     def dev_storypath(self):
@@ -14,6 +15,9 @@ class StoryPath:
         StoryPath.forest.prompt = "FOREST - Go to the forest"
         StoryPath.forest.completion = False
         StoryPath.forest.available = True
+        StoryPath.tall_grass.prompt = "GRASS - Go to the tall grass"
+        StoryPath.tall_grass.completion = False
+        StoryPath.tall_grass.available = True
         StoryPath.test.prompt = "WRONG"
         StoryPath.test.completion = True
         StoryPath.test.available = False

@@ -23,7 +23,7 @@ def main():
     story_path = StoryPath()        # things get messy here. houses all the quests, as well as their status. Directs
                                     # main to quests housed inside the story path.
     story_path.dev_storypath()      # This sets up the storypath
-    home_write_up(home, pc, inventory, story_path) # how home presents itself to the player and gives them options.
+    home_write_up(home, pc, inventory, story_path)      # how home presents itself to the player and gives them options.
 
 
 if __name__ == '__main__':

@@ -73,14 +73,14 @@ def use_weapon(implement, sheet, ac):
         return 0
 
 
-def encounter(inventory, sheet, ac, hit_points, bonus, damage_low, damage_high):
-    hp = hit_points
-    while hp > 0 and sheet.hp.value > 0:
+def encounter(sheet, inventory, ac, hit_points, bonus, damage_low, damage_high):
+    hitp = hit_points
+    while hitp > 0 and sheet.hp.value > 0:
         weapon_checker(inventory)
-        hp -= use_weapon(weapon_selector(inventory), sheet, ac)
-        if hp > 0:
-            print("They have " + str(hp) + " HP.")
-        elif hp <= 0:
+        hitp -= use_weapon(weapon_selector(inventory), sheet, ac)
+        if hitp > 0:
+            print("They have " + str(hitp) + " HP.")
+        elif hitp <= 0:
             print("You've killed the beast!")
         counter = roll(1, 20, bonus)
         if counter >= sheet.quick.value:

@@ -15,7 +15,7 @@ class Weapon:
 '''Weapons are a bit more complex than misc but not much more.'''
 
 
-class misc:
+class Misc:
     def __init__(self, possession):
         self.possession = possession
 
@@ -39,3 +39,5 @@ class Inventory:
         self.bow_arrow = Weapon(False, "ranged", 4, 0)
         self.crossbow = Weapon(False, "ranged", 6, 2)
         self.musket = Weapon(False, "ranged", 10, 0)
+        self.bandit_gold = Misc(False)
+        self.drunk_wallet = Misc(False)
